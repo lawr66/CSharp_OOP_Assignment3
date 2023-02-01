@@ -9,7 +9,7 @@ class Program
         Account acc = new Account("12345",2660,"Mary Smith","Normal");
         CheckingAccount checking = new CheckingAccount("1234",500,"Sam Brown","Checking");
         SavingsAccount savings = new SavingsAccount("4321",5000,"John Doe","Savings");
-     /*   double sum;
+        double sum;
 
         acc.DisplayInfo();
         checking.DisplayInfo();
@@ -68,7 +68,7 @@ class Program
         acc.DepositMoney(sum);
         acc.DisplayInfo();
         acc.CheckBalance();
-        checking.Serialize(checking);
+        checking.Serialize();
         checking.DisplayInfo();
         Account serializedAcc = new Account("223",52000,"John Dough","Savings");
         serializedAcc.DisplayInfo();
@@ -76,7 +76,6 @@ class Program
         serializedAcc = serializedAcc.Deserialize();
         serializedAcc.DisplayInfo();
         Console.WriteLine(serializedAcc.GetType());
-        */
        /* List<Account> accounts = new List<Account>
         {
             acc,
