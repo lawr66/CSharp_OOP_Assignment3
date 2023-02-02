@@ -54,7 +54,7 @@ public class Account : IComparable, ISerializable
         File.WriteAllText(fileName, jsonString);
     }
 
-        public Account Deserialize()
+    public Account Deserialize()
     {
         string fileName = "Account.json";
         string jsonString = File.ReadAllText(fileName);
@@ -63,7 +63,7 @@ public class Account : IComparable, ISerializable
         {
             acc = new CheckingAccount(acc._accountNumber,acc._balance,acc._ownerName,AccountType);
         }
-        else if(string.Equals(acc.AccountType,"Checking",StringComparison.OrdinalIgnoreCase))
+        else if(string.Equals(acc.AccountType,"Savings",StringComparison.OrdinalIgnoreCase))
         {
             acc = new SavingsAccount(acc._accountNumber,acc._balance,acc._ownerName,AccountType);
         }
@@ -77,18 +77,23 @@ public class Account : IComparable, ISerializable
         this.AccountType = accountType;
     }
 
-    public void DepositMoney(double sum)
+    public double DepositMoney(double sum)
     {
         this._balance = this._balance + sum;
-        Console.WriteLine("Sum introduced successfully, new balance: {0}", this._balance);
+        return this._balance;
     }    
 
     public double WithdrawMoney(double sum)
     {
-
-        this._balance = this._balance - sum;
-        Console.WriteLine("Sum withdrawn successfully, new balance: {0}", this._balance);
-        return sum;
+        if(sum< this._balance)
+        {
+            this._balance = this._balance - sum;
+            return this._balance;
+        }
+        else
+        {
+            return -1;
+        }
     }    
 
     public void CheckBalance()
@@ -96,23 +101,27 @@ public class Account : IComparable, ISerializable
         Console.WriteLine("Current balance: {0}",this._balance);
     }
 
-    public virtual double Transfer(Account acc, double sum)
+    public virtual (double, double, double) Transfer(Account acc, double sum)
     {
-        this._balance = this._balance - sum;
-        acc._balance = acc._balance + sum;
-        Console.WriteLine("Transfer successful");
-        return sum;
-
+        if(sum<this._balance)
+        {
+            this._balance = this._balance - sum;
+            acc._balance = acc._balance + sum;
+            return (this._balance, acc._balance, sum);
+        }
+        else
+        {
+            return(this._balance,-1,sum);
+        }
     }
     public void DisplayInfo()
     {
         Console.WriteLine("Account number: {0} \nOwner name: {1} \nBalance: {2} \nAccount Type: {3}",this._accountNumber, this._ownerName, this._balance, this.AccountType);
     }
 
-    public int CompareTo(object? obj)
+    public int CompareTo(object obj)
     {
         Account incomingAccount = obj as Account;
-
         return this.balance.CompareTo(incomingAccount.balance);
     }
 
