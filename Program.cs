@@ -162,7 +162,7 @@ class Program
                 if(double.TryParse(Console.ReadLine(), out sum))
                 {
                     (double, double, double) result = acc.Transfer(savings, sum);
-                    if(result.Item2==-1)
+                    if(result.Item2 == -1 || result.Item2 == -2)
                     {
                         Console.WriteLine("Introduced sum is higher than current balance ({0})", result.Item1);
                         Console.Write("Do you want to retry? (Y/N)");
