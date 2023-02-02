@@ -211,35 +211,31 @@ class Program
         }
         */
         //acc.CheckBalance();   //Testing the CheckBalance() method
-        /*
-        
+      
         //Testing the Serialize() and Deserialize() methods for CheckingAccount type object
 
         checking.Serialize();
         checking.DisplayInfo();
-        Account serializedAcc = checking.Deserialize();
+        Account serializedAcc = checking.Deserialize("1234");
         serializedAcc.DisplayInfo();
-        */
-        /*
-
+  
+  /*
         //Testing the Serialize() and Deserialize() methods for SavingsAccount type object
 
         savings.Serialize();
         savings.DisplayInfo();
-        Account serializedAcc = savings.Deserialize();
+        Account serializedAcc = savings.Deserialize("4321");
         serializedAcc.DisplayInfo();
-        */
+*/
 
-        /*
-
+/*
         //Testing the Serialize() and Deserialize() methods for Account type object
 
         acc.Serialize();
         acc.DisplayInfo();
-        Account serializedAcc = acc.Deserialize();
+        Account serializedAcc = acc.Deserialize("12345");
         serializedAcc.DisplayInfo();
-        */
-
+ */
     }
 }
 

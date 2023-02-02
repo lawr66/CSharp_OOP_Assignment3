@@ -47,16 +47,23 @@ public class Account : IComparable, ISerializable
         }
     }
 
+    private Account()
+    {
+
+    }
+
     public void Serialize()
     {
-        string fileName = "Account.json"; 
+        string fileName = string.Format("Account_{0}.json",this._accountNumber); 
         string jsonString = JsonSerializer.Serialize(this);
         File.WriteAllText(fileName, jsonString);
     }
 
-    public Account Deserialize()
+    public Account Deserialize(string accNumber)
     {
-        string fileName = "Account.json";
+        try
+        {
+        string fileName = string.Format("Account_{0}.json",accNumber);
         string jsonString = File.ReadAllText(fileName);
         Account acc = JsonSerializer.Deserialize<Account>(jsonString);
         if(string.Equals(acc.AccountType,"Checking",StringComparison.OrdinalIgnoreCase))
@@ -68,6 +75,13 @@ public class Account : IComparable, ISerializable
             acc = new SavingsAccount(acc._accountNumber,acc._balance,acc._ownerName,AccountType);
         }
         return acc;
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("Couldn't find specified account number.");
+            Account acc = new Account();
+            return acc;
+        }
     }
     public Account(string accountNumber, double balance, string ownerName, string accountType)
     {
