@@ -117,15 +117,22 @@ public class Account : IComparable, ISerializable
 
     public virtual (double, double, double) Transfer(Account acc, double sum)
     {
-        if(sum<this._balance)
+        if(acc == this)
         {
-            this._balance = this._balance - sum;
-            acc._balance = acc._balance + sum;
-            return (this._balance, acc._balance, sum);
+            return (-3,-3,-3);
         }
         else
         {
-            return(this._balance,-1,sum);
+            if(sum<=this._balance)
+            {
+                this._balance = this._balance - sum;
+                acc._balance = acc._balance + sum;
+                return (this._balance, acc._balance, sum);
+            }
+            else
+            {
+                return(this._balance,-1,sum);
+            }
         }
     }
     public void DisplayInfo()
@@ -136,7 +143,18 @@ public class Account : IComparable, ISerializable
     public int CompareTo(object obj)
     {
         Account incomingAccount = obj as Account;
-        return this.balance.CompareTo(incomingAccount.balance);
+        if(long.Parse(this._accountNumber) < long.Parse(incomingAccount._accountNumber))
+        {
+            return -1;
+        }
+        else if(long.Parse(this._accountNumber) > long.Parse(incomingAccount._accountNumber))
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public void GetObjectData(SerializationInfo info, StreamingContext context)

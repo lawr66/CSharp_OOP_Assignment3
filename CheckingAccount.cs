@@ -10,15 +10,22 @@ public class CheckingAccount : Account
 
     public override (double, double, double) Transfer(Account acc, double sum)
     {
-        if(sum<this.balance)
+        if(acc == this)
         {
-            this.balance = this.balance - sum;
-            acc.balance = acc.balance + sum;
-            return (this.balance, acc.balance, sum);
+            return (-3,-3,-3);
         }
         else
         {
-            return(this.balance,-1,sum);
+            if(sum<=this.balance)
+            {
+                this.balance = this.balance - sum;
+                acc.balance = acc.balance + sum;
+                return (this.balance, acc.balance, sum);
+            }
+            else
+            {
+                return(this.balance,-1,sum);
+            }
         }
     }
 }

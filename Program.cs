@@ -183,12 +183,16 @@ class Program
                             break;
                         }
                     }
+                    else if(result.Item1==-3)
+                    {
+                        Console.WriteLine("Error: can't transfer from the same account that you are transferring from.");
+                        break;
+                    }
                     else
                     {
                         Console.WriteLine("Sucsesfully transferred {0}. The transferer's new balance: {1}. The account's which got the transfer new balance: {2}",result.Item3, result.Item1, result.Item2);
                         break;
                     }
-
                 }
                 else
                 {
